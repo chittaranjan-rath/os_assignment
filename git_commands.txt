@@ -7,3 +7,6 @@ git config --global user.email "chitta.iiith@gmail.com"
 git config user.name
 git config user.email
 
+ git add git_commands.txt 
+git commit -m "git setup completed"
+
