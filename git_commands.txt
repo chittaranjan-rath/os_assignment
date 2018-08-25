@@ -1,0 +1,9 @@
+git init
+git  remote add my_os https://github.com/chittaranjan-rath/os_assignment.git
+git remote
+
+git config --global user.name "chitta"
+git config --global user.email "chitta.iiith@gmail.com"
+git config user.name
+git config user.email
+
