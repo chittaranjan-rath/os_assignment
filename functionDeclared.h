@@ -1,7 +1,7 @@
 #include<stdio.h> //perror()
 #include<stdlib.h> //atexit() exit()
 #include <unistd.h>
-#include <termios.h> //ISIG ICANON 
+#include <termios.h> //ISIG ICANON VMIN VTIME
 #include <ctype.h> //iscntrl()
 #include <errno.h>
 
