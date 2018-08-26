@@ -1,6 +1,6 @@
 #include "functionDeclared.h"
 struct termios originalTermiosValue;
-
+#define CTRL_KEY(k) ((k) & 0x1f)
 void die(const char *s) {
   perror(s);
   exit(1);
@@ -32,4 +32,26 @@ void enableRawMode() {
 }
 
 
+char editorReadKey() {
+  int nread;
+  char c;
+  while ((nread = read(STDIN_FILENO, &c, 1)) != 1) {
+    if (nread == -1 && errno != EAGAIN) die("read");
+  }
+  return c;
+}
+/*** input ***/
+void editorProcessKeypress() {
+  char c = editorReadKey();
+  switch (c) {
+    case CTRL_KEY('q'):
+      exit(0);
+      break;
+  }
+}
+
+
+void editorRefreshScreen() {
+  write(STDOUT_FILENO, "\x1b[2J", 4); //4 means witting 4B to terminal and first byte is \x1b which is esc seq 27(in decimal) other 3 bytes are [2J where J command is erase in display 2 says clear whole screen
+}
 
