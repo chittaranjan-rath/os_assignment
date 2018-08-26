@@ -9,4 +9,5 @@ git config user.email
 
  git add git_commands.txt 
 git commit -m "git setup completed"
+git push -u my_os master
 
