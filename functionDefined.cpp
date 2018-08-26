@@ -2,8 +2,10 @@
 struct termios originalTermiosValue;
 #define CTRL_KEY(k) ((k) & 0x1f)
 void die(const char *s) {
-  perror(s);
-  exit(1);
+	write(STDOUT_FILENO, "\x1b[2J", 4);
+	write(STDOUT_FILENO, "\x1b[H", 3);
+	perror(s);
+	exit(1);
 }
 
 void disableRawMode(){
@@ -45,13 +47,17 @@ void editorProcessKeypress() {
   char c = editorReadKey();
   switch (c) {
     case CTRL_KEY('q'):
-      exit(0);
-      break;
+	write(STDOUT_FILENO, "\x1b[2J", 4);
+      	write(STDOUT_FILENO, "\x1b[H", 3);
+      	exit(0);
+      	break;
   }
 }
 
 
 void editorRefreshScreen() {
   write(STDOUT_FILENO, "\x1b[2J", 4); //4 means witting 4B to terminal and first byte is \x1b which is esc seq 27(in decimal) other 3 bytes are [2J where J command is erase in display 2 says clear whole screen
+	write(STDOUT_FILENO, "\x1b[H", 3);
+
 }
 
